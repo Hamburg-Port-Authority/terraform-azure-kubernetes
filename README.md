@@ -10,7 +10,7 @@ The module is used to deploy azure kubernetes service over terraform with a defa
 
     module "kubernetes" {
 
-        source = "github.com/la-cc/terraform-azure-kubernetes?ref=1.0.0"
+        source = "github.com/Hamburg-Port-Authority/terraform-azure-kubernetes?ref=1.0.0"
 
         resource_group_name          = module.rg.main.name
         virtual_network_id           = module.network.virtual_network_id
