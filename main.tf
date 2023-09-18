@@ -57,6 +57,10 @@ resource "azurerm_kubernetes_cluster" "main" {
     load_balancer_sku  = var.enable_node_pools ? "standard" : var.load_balancer_sku
   }
 
+  api_server_access_profile {
+    authorized_ip_ranges = var.authorized_ip_ranges
+  }
+
   tags = var.tags
 }
 

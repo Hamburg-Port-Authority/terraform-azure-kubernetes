@@ -92,6 +92,15 @@ variable "zones" {
     EOT
 }
 
+variable "authorized_ip_ranges" {
+
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = <<-EOT
+    Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+    EOT
+}
+
 variable "enable_node_public_ip" {
   type        = bool
   default     = false
