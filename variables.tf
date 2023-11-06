@@ -227,11 +227,6 @@ variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service. Changing this forces a new resource to be created"
 }
 
-variable "docker_bridge_cidr" {
-  type        = string
-  default     = "172.17.0.1/16"
-  description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes"
-}
 
 variable "network_policy" {
   type        = string

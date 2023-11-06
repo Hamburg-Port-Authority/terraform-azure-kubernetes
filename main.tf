@@ -51,10 +51,9 @@ resource "azurerm_kubernetes_cluster" "main" {
     service_cidr = var.service_cidr
     # IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns).
     # Don't use the first IP address in your address range, such as .1. The first address in your subnet range is used for the kubernetes.default.svc.cluster.local address.
-    dns_service_ip     = cidrhost(var.service_cidr, -2)
-    docker_bridge_cidr = var.docker_bridge_cidr
-    network_policy     = var.network_policy
-    load_balancer_sku  = var.enable_node_pools ? "standard" : var.load_balancer_sku
+    dns_service_ip    = cidrhost(var.service_cidr, -2)
+    network_policy    = var.network_policy
+    load_balancer_sku = var.enable_node_pools ? "standard" : var.load_balancer_sku
   }
 
   api_server_access_profile {
