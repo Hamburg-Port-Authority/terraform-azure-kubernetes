@@ -25,6 +25,14 @@ resource "azurerm_kubernetes_cluster" "main" {
     orchestrator_version  = var.orchestrator_version
   }
 
+  lifecycle {
+    ignore_changes = [
+      default_node_pool[0].node_count
+    ]
+  }
+
+
+
   azure_active_directory_role_based_access_control {
     managed                = var.enable_aad_rbac
     admin_group_object_ids = var.enable_aad_rbac == true ? var.admin_list : []
@@ -83,6 +91,13 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   node_labels         = each.value.node_labels
   node_taints         = each.value.node_taints
   os_disk_size_gb     = each.value.os_disk_size_gb
+
+  lifecycle {
+    ignore_changes = [
+      node_count, tags
+    ]
+  }
+
 
   tags = var.tags
 }
