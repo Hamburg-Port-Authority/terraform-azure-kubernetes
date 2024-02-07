@@ -309,6 +309,13 @@ variable "node_pools" {
   default = {}
 }
 
+variable "azure_policy_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable Azure Policy on the Kubernetes Cluster"
+
+}
+
 variable "tags" {
   type = map(string)
   default = {

@@ -7,6 +7,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix             = var.node_dns_prefix
   node_resource_group    = var.node_resource_group
   local_account_disabled = var.local_account_disabled
+  azure_policy_enabled   = var.azure_policy_enabled
 
   default_node_pool {
     name                  = var.node_pool_profile_name
