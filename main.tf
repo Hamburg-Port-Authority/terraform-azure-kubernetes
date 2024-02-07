@@ -21,8 +21,12 @@ resource "azurerm_kubernetes_cluster" "main" {
     min_count             = var.enable_auto_scaling == true ? var.node_pool_min_count : null
     max_count             = var.enable_auto_scaling == true ? var.node_pool_max_count : null
     max_pods              = var.max_pods_per_node
-    node_taints           = var.node_taints
-    orchestrator_version  = var.orchestrator_version
+
+    node_taints          = var.node_taints
+    orchestrator_version = var.orchestrator_version
+    upgrade_settings {
+      max_surge = var.node_pool_max_surge
+    }
   }
 
   lifecycle {
@@ -91,6 +95,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   node_labels         = each.value.node_labels
   node_taints         = each.value.node_taints
   os_disk_size_gb     = each.value.os_disk_size_gb
+
+  upgrade_settings {
+    max_surge = each.value.node_pool_max_surge
+  }
 
   lifecycle {
     ignore_changes = [

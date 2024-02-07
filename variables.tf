@@ -151,6 +151,13 @@ variable "node_pool_max_count" {
     EOT
 }
 
+variable "node_pool_max_surge" {
+  type        = number
+  default     = 50
+  description = "(Required) The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade."
+
+}
+
 variable "node_dns_prefix" {
   type        = string
   default     = "node"
@@ -291,6 +298,7 @@ variable "node_pools" {
     max_count              = number
     min_count              = number
     node_count             = number
+    max_surge              = number
   }))
 
   description = <<-EOT
