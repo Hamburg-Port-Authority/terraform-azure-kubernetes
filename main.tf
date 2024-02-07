@@ -30,9 +30,13 @@ resource "azurerm_kubernetes_cluster" "main" {
     }
   }
 
+
+
   lifecycle {
     ignore_changes = [
-      default_node_pool[0].node_count
+      default_node_pool[0].node_count,
+      microsoft_defender
+
     ]
   }
 
