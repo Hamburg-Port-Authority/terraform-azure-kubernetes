@@ -43,7 +43,7 @@ variable "sku_tier" {
 
 variable "kubernetes_version" {
   type        = string
-  default     = "1.24.9"
+  default     = "1.28.3"
   description = "Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
 }
 
@@ -152,8 +152,8 @@ variable "node_pool_max_count" {
 }
 
 variable "node_pool_max_surge" {
-  type        = number
-  default     = 50
+  type        = string
+  default     = "25%"
   description = "(Required) The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade."
 
 }
@@ -195,7 +195,7 @@ variable "node_resource_group" {
 variable "orchestrator_version" {
   type        = string
   description = "Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)"
-  default     = "1.24.9"
+  default     = "1.28.3"
 }
 
 variable "kubernetes_subnet_name" {
@@ -298,7 +298,7 @@ variable "node_pools" {
     max_count              = number
     min_count              = number
     node_count             = number
-    max_surge              = number
+    max_surge              = string
   }))
 
   description = <<-EOT
