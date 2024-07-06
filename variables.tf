@@ -267,6 +267,20 @@ variable "enable_aad_rbac" {
 
 }
 
+variable "oidc_issuer_enabled" {
+  type        = bool
+  default     = false
+  description = "Is OIDC issuer enabled? If true, the OIDC issuer will be enabled with Azure AD."
+
+}
+
+variable "workload_identity_enabled" {
+  type        = bool
+  default     = false
+  description = "Is Workload Identity enabled? If true, the Workload Identity will be enabled with Azure AD. Require OIDC issuer enabled."
+
+}
+
 
 variable "admin_list" {
   type        = list(string)

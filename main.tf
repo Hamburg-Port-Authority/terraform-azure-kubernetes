@@ -40,11 +40,13 @@ resource "azurerm_kubernetes_cluster" "main" {
     ]
   }
 
+  oidc_issuer_enabled = var.oidc_issuer_enabled
 
+  workload_identity_enabled = var.oidc_issuer_enabled == true ? var.workload_identity_enabled : false
 
   azure_active_directory_role_based_access_control {
-    managed                = var.enable_aad_rbac
-    admin_group_object_ids = var.enable_aad_rbac == true ? var.admin_list : []
+    managed                = true #required to be set to true. "This field must be supplied with the value `true` for AKS-managed Entra Integration."
+    admin_group_object_ids = var.admin_list
     azure_rbac_enabled     = var.enable_aad_rbac
   }
 
