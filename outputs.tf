@@ -57,3 +57,8 @@ output "route_table_id" {
   value       = azurerm_route_table.main.id
   description = "The Route Table ID."
 }
+
+output "oidc_issuer_url" {
+  value       = azurerm_kubernetes_cluster.main.oidc_issuer_url
+  description = "The OIDC Issuer URL."
+}
