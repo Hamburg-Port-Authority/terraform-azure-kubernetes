@@ -104,7 +104,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   os_disk_size_gb     = each.value.os_disk_size_gb
 
   upgrade_settings {
-    max_surge = each.value.node_pool_max_surge
+    max_surge = each.value.max_surge
   }
 
   lifecycle {
