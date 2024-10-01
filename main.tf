@@ -92,9 +92,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   name                 = each.value.name
   vm_size              = each.value.vm_size
   zones                = each.value.zones
-  auto_scaling_enabled = each.value.enable_auto_scaling
-  max_count            = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
-  min_count            = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
+  auto_scaling_enabled = each.value.auto_scaling_enabled
+  max_count            = each.value.auto_scaling_enabled == true ? each.value.node_pool_min_count : null
+  min_count            = each.value.auto_scaling_enabled == true ? each.value.node_pool_min_count : null
   node_count           = each.value.node_count
   node_labels          = each.value.node_labels
   node_taints          = each.value.node_taints
