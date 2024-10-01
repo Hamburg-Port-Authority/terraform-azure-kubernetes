@@ -107,12 +107,6 @@ variable "enable_node_public_ip" {
   description = "Should nodes in this Node Pool have a Public IP Address? Defaults to false. Changing this forces a new resource to be created."
 }
 
-variable "enable_auto_scaling" {
-  type        = bool
-  default     = false
-  description = "Should the Kubernetes Auto Scaler be enabled for this Node Pool? Defaults to false."
-}
-
 variable "node_pool_count" {
   type        = number
   default     = 3
@@ -176,14 +170,6 @@ variable "node_admin_username" {
   description = "The Admin Username for the Cluster. Changing this forces a new resource to be created."
 }
 
-variable "node_taints" {
-  type    = list(string)
-  default = null
-
-  description = <<-EOT
-    A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)
-    EOT
-}
 
 variable "node_resource_group" {
   type        = string
@@ -245,12 +231,6 @@ variable "load_balancer_sku" {
   type        = string
   default     = "standard"
   description = "Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are basic and standard. Defaults to standard"
-}
-
-variable "disable_bgp_route_propagation" {
-  type        = bool
-  description = "If set to true, the route propogation for the kubernetes route table will be disabled."
-  default     = false
 }
 
 variable "identity" {

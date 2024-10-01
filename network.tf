@@ -7,11 +7,10 @@ resource "azurerm_subnet" "main" {
 }
 
 resource "azurerm_route_table" "main" {
-  name                          = var.kubernetes_subnet_name
-  location                      = var.location
-  resource_group_name           = var.resource_group_name
-  disable_bgp_route_propagation = var.disable_bgp_route_propagation
-  tags                          = var.tags
+  name                = var.kubernetes_subnet_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  tags                = var.tags
 }
 
 resource "azurerm_subnet_route_table_association" "main" {

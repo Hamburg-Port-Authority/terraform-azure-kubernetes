@@ -10,20 +10,18 @@ resource "azurerm_kubernetes_cluster" "main" {
   azure_policy_enabled   = var.azure_policy_enabled
 
   default_node_pool {
-    name                  = var.node_pool_profile_name
-    type                  = var.node_pool_type
-    vm_size               = var.vm_size
-    os_disk_size_gb       = var.os_disk_size_gb
-    zones                 = var.node_pool_type == "VirtualMachineScaleSets" ? var.zones : null
-    vnet_subnet_id        = azurerm_subnet.main.id
-    enable_node_public_ip = var.enable_node_public_ip
-    enable_auto_scaling   = var.node_pool_type == "VirtualMachineScaleSets" ? var.enable_auto_scaling : null
-    node_count            = var.node_pool_count
-    min_count             = var.enable_auto_scaling == true ? var.node_pool_min_count : null
-    max_count             = var.enable_auto_scaling == true ? var.node_pool_max_count : null
-    max_pods              = var.max_pods_per_node
+    name                   = var.node_pool_profile_name
+    type                   = var.node_pool_type
+    vm_size                = var.vm_size
+    os_disk_size_gb        = var.os_disk_size_gb
+    zones                  = var.node_pool_type == "VirtualMachineScaleSets" ? var.zones : null
+    vnet_subnet_id         = azurerm_subnet.main.id
+    node_public_ip_enabled = var.enable_node_public_ip
+    node_count             = var.node_pool_count
+    min_count              = var.node_pool_min_count
+    max_count              = var.node_pool_max_count
+    max_pods               = var.max_pods_per_node
 
-    node_taints          = var.node_taints
     orchestrator_version = var.orchestrator_version
     upgrade_settings {
       max_surge = var.node_pool_max_surge
@@ -45,7 +43,6 @@ resource "azurerm_kubernetes_cluster" "main" {
   workload_identity_enabled = var.oidc_issuer_enabled == true ? var.workload_identity_enabled : false
 
   azure_active_directory_role_based_access_control {
-    managed                = true #required to be set to true. "This field must be supplied with the value `true` for AKS-managed Entra Integration."
     admin_group_object_ids = var.admin_list
     azure_rbac_enabled     = var.enable_aad_rbac
   }
@@ -92,16 +89,16 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vnet_subnet_id        = azurerm_subnet.main.id
 
-  name                = each.value.name
-  vm_size             = each.value.vm_size
-  zones               = each.value.zones
-  enable_auto_scaling = each.value.enable_auto_scaling
-  max_count           = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
-  min_count           = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
-  node_count          = each.value.node_count
-  node_labels         = each.value.node_labels
-  node_taints         = each.value.node_taints
-  os_disk_size_gb     = each.value.os_disk_size_gb
+  name                 = each.value.name
+  vm_size              = each.value.vm_size
+  zones                = each.value.zones
+  auto_scaling_enabled = each.value.enable_auto_scaling
+  max_count            = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
+  min_count            = each.value.enable_auto_scaling == true ? each.value.node_pool_min_count : null
+  node_count           = each.value.node_count
+  node_labels          = each.value.node_labels
+  node_taints          = each.value.node_taints
+  os_disk_size_gb      = each.value.os_disk_size_gb
 
   upgrade_settings {
     max_surge = each.value.max_surge
