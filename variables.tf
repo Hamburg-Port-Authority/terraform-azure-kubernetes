@@ -121,6 +121,12 @@ variable "node_pool_count" {
     EOT
 }
 
+variable "auto_scaling_enabled" {
+  type        = bool
+  default     = true
+  description = "Should the Node Pool be auto-scaled? Defaults to true. Changing this forces a new resource to be created."
+}
+
 variable "node_pool_min_count" {
   type        = number
   default     = 4

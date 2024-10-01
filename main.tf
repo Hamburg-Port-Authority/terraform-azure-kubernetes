@@ -15,11 +15,12 @@ resource "azurerm_kubernetes_cluster" "main" {
     vm_size                = var.vm_size
     os_disk_size_gb        = var.os_disk_size_gb
     zones                  = var.node_pool_type == "VirtualMachineScaleSets" ? var.zones : null
+    auto_scaling_enabled   = var.auto_scaling_enabled
     vnet_subnet_id         = azurerm_subnet.main.id
     node_public_ip_enabled = var.enable_node_public_ip
     node_count             = var.node_pool_count
-    min_count              = var.node_pool_min_count
-    max_count              = var.node_pool_max_count
+    min_count              = var.auto_scaling_enabled == true ? var.node_pool_min_count : null
+    max_count              = var.auto_scaling_enabled == true ? var.node_pool_max_count : null
     max_pods               = var.max_pods_per_node
 
     orchestrator_version = var.orchestrator_version
