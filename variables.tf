@@ -111,11 +111,11 @@ variable "node_pool_count" {
   type        = number
   default     = 3
   description = <<-EOT
-    If enable_auto_scaling is set to true, this variable:
+    If auto_scaling_enabled is set to true, this variable:
         - is optional.
         - specifies the initial number of nodes which should exist in the Node Pool.
 
-    If enable_auto_scaling is set to false, this variable:
+    If auto_scaling_enabled is set to false, this variable:
         - is required.
         - specifies the fixed number of nodes which should exist in the Node Pool.
     EOT
@@ -125,11 +125,11 @@ variable "node_pool_min_count" {
   type        = number
   default     = 4
   description = <<-EOT
-    If enable_auto_scaling is set to true, this variable:
+    If auto_scaling_enabled is set to true, this variable:
         - is required.
         - specifies the minimum number of nodes which should exist in the Node Pool.
 
-    If enable_auto_scaling is set to false, this variable should not be set.
+    If auto_scaling_enabled is set to false, this variable should not be set.
     EOT
 }
 
@@ -137,11 +137,11 @@ variable "node_pool_max_count" {
   type        = number
   default     = 10
   description = <<-EOT
-    If enable_auto_scaling is set to true, this variable:
+    If auto_scaling_enabled is set to true, this variable:
         - is required.
         - specifies the maximum number of nodes which should exist in the Node Pool.
 
-    If enable_auto_scaling is set to false, this variable should not be set.
+    If auto_scaling_enabled is set to false, this variable should not be set.
     EOT
 }
 
@@ -282,7 +282,7 @@ variable "node_pools" {
     name                   = string
     vm_size                = string
     zones                  = list(string)
-    enable_auto_scaling    = bool
+    auto_scaling_enabled   = bool
     enable_host_encryption = bool
     enable_node_public_ip  = bool
     max_pods               = number
